@@ -1,4 +1,4 @@
-import { FaMicrophone, FaYoutube } from 'react-icons/fa';
+import { FaMicrophone } from 'react-icons/fa';
 import { HeaderMoreSection, LeftSection, LogoSection, SearchBar, SearchSection, StyledHeader } from './Header.styles'
 import { Text } from '../../utils/Text.styles'
 import { SlMenu } from 'react-icons/sl'
@@ -10,6 +10,7 @@ import Settings from '../settings/Settings';
 import { useAppContext } from '../../context/App.context';
 import { LuSearch } from 'react-icons/lu';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import YouTubeLogo from "../../assets/youtubeicon.svg";
 
 const Header = () => {
   const [showSetting, setShowSetting] = useState<boolean>(false);
@@ -40,7 +41,7 @@ const Header = () => {
           <SlMenu size={17} />
         </Icon>
         <LogoSection to="">
-          <FaYoutube color='#ff0000' size={30} />
+          <img src={YouTubeLogo} width={30}/>
           <Text className='logo'>YouTube</Text>
         </LogoSection>
       </LeftSection>
