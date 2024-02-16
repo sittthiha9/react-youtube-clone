@@ -75,19 +75,21 @@ export const RegularVideoTile = styled.div`
   }
 
   .name{
-    font-size: 14px;
+    font-size: 13.5px;
     margin: .5rem 0 .2rem 0;
     color: ${({ theme: { text } }) => text};
-    opacity: 80%;
+    opacity: 70%;
+    font-weight: 400;
   }
 
   .details{
-    font-size: 14px;
+    font-size: 13px;
+    font-weight: 400;
     display: flex;
     align-items: center;
-    gap: 0.2rem;
+    gap: 0.4rem;
     color: ${({ theme: { text } }) => text};
-    opacity: 80%;
+    opacity: 70%;
   }
 
   .dot{

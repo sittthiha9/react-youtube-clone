@@ -54,7 +54,7 @@ const RegularVideoItem = ({ video }: IRegularVideoItemProps) => {
           <Text className='name'>{video.user.name}</Text>
           <Text className='details'>{video.duration}
             M views
-            <span className='dot'>$#9679;</span>
+            <span className='dot'>&#9679;</span>
             2 hours ago
           </Text>
         </RegularVideoTile>
