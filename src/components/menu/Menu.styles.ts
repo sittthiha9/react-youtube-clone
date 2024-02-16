@@ -15,12 +15,21 @@ export const StyledMenu = styled.div`
 export const LargeMenuSection = styled.div`
   border-bottom: 1px solid ${({ theme: { divider } }) => divider};
   padding: .7rem 0;
+
+  &.text{
+    padding: 1.0rem 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    line-height: 1.2rem;
+  }
 `
 
-export const MenuItem = styled.div`
+export const MenuItem = styled.div<{ active: string }>`
   display: flex;
   color: ${({ theme: { text } }) => text};
   border-radius: 0.5rem;
+  background-color: ${({ active, theme: { grey2 } }) => (active === "true" ? grey2 : 'transparent')};
 
   &.small{
     font-size: 26px;
