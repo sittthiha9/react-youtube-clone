@@ -23,6 +23,7 @@ const Menu = () => {
       <StyledMenu>
         {MENU_LARGE.map(({ title, list }, index) => (
           <LargeMenuSection key={index}>
+            {title && <Text className='title'>{text[title as keyof ITranslations]}</Text>}
             {list.map(({ name, icon }, index) => (
               <MenuItem key={index} className='large'>
                 {icon}

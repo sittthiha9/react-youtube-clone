@@ -4,6 +4,12 @@ export const StyledMenu = styled.div`
   width: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
+
+  .title{
+    font-size: 16px;
+    margin: 0.5rem 0 .5rem 1rem;
+    font-weight: bold;
+  }
 `
 
 export const LargeMenuSection = styled.div`

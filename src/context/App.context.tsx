@@ -8,7 +8,7 @@ interface IAppContextValue {
   toggleTheme: () => void;
   text: ITranslations;
   searchBarText: string;
-  setSearchBarText:Dispatch<SetStateAction<string>>;
+  setSearchBarText: Dispatch<SetStateAction<string>>;
   isMenuSmall: boolean;
   toggleMenuSize: () => void;
 }
@@ -17,7 +17,7 @@ const AppContext = createContext<IAppContextValue | null>(null)
 export const useAppContext = () => {
   const appContent = useContext(AppContext)
 
-  if(!appContent) {
+  if (!appContent) {
     throw new Error("There is no context")
   }
 
@@ -45,7 +45,7 @@ export const AppContextProvider = ({ children }: IAppContextProviderProps) => {
   const toggleMenuSize = () => {
     setIsMenuSmall(state => !state)
   }
-  
+
   const value = {
     theme,
     language,

@@ -35,8 +35,8 @@ export const MENU_LARGE = [
 		title: "",
 		list: [
 			{ name: "home", icon: <MdHome /> },
-			{ name: "shorts", icon: <SiYoutubeshorts /> },
-			{ name: "subscriptions", icon: <BsCollectionPlay /> },
+			{ name: "shorts", icon: <SiYoutubeshorts size={21}/> },
+			{ name: "subscriptions", icon: <BsCollectionPlay size={20}/> },
 		],
 	},
 	{
