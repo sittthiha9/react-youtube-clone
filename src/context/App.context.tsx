@@ -1,5 +1,7 @@
-import { Dispatch, ReactNode, SetStateAction, createContext, useContext, useState } from "react";
+import { Dispatch, ReactNode, SetStateAction, createContext, useContext, useEffect, useState } from "react";
 import { ITranslations, LANGUAGE } from "../utils/translations";
+import { createClient } from "pexels";
+import { PEXELS_API_KEY } from "../utils/pexels";
 
 interface IAppContextValue {
   theme: "light" | "dark";
@@ -31,6 +33,8 @@ interface IAppContextProviderProps {
   children: ReactNode;
 }
 
+const client = createClient(PEXELS_API_KEY);
+
 export const AppContextProvider = ({ children }: IAppContextProviderProps) => {
   const [theme, setTheme] = useState<"light" | "dark">("dark");
   const [language, setLanguage] = useState<"english" | "french">("english")
@@ -38,6 +42,29 @@ export const AppContextProvider = ({ children }: IAppContextProviderProps) => {
   const [isMenuSmall, setIsMenuSmall] = useState(false);
   const [activeMenuText, setActiveMenuText] = useState("home")
   const [activeCategory, setActiveCategory] = useState("all")
+
+  useEffect(() => {
+    fetchVideo(activeCategory);
+  }, [activeCategory, searchBarText])
+
+  useEffect(() => {
+    fetchVideo(searchBarText);
+  }, [searchBarText])
+
+  const fetchVideo = async (query: string) => {
+    try {
+      if (!query) {
+        return;
+      }
+      const response = await client.videos.search({
+        query,
+        per_page: 44
+      })
+      console.log("response:", response)
+    } catch (error) {
+      console.log("There was an error fetching videos:", error)
+    }
+  }
 
   const toggleTheme = () => {
     setTheme(theme => theme === "light" ? "dark" : 'light')
