@@ -15,7 +15,7 @@ import YouTubeLogo from "../../assets/youtubeicon.svg";
 const Header = () => {
   const [showSetting, setShowSetting] = useState<boolean>(false);
   const [searchText, setSearchText] = useState("")
-  const { text, searchBarText, setSearchBarText } = useAppContext();
+  const { text, searchBarText, setSearchBarText, toggleMenuSize } = useAppContext();
 
   const {
     transcript,
@@ -37,7 +37,7 @@ const Header = () => {
   return (
     <StyledHeader>
       <LeftSection>
-        <Icon className='menu'>
+        <Icon className='menu' onClick={() => toggleMenuSize()}>
           <SlMenu size={17} />
         </Icon>
         <LogoSection to="">

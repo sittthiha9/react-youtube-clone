@@ -4,6 +4,7 @@ import { THEMES } from "./utils/theme"
 import { useAppContext } from "./context/App.context"
 import Header from "./components/header/Header"
 import Tooltips from "./utils/Tooltips"
+import Body from "./components/body/Body"
 
 const App = () => {
   const { theme } = useAppContext();
@@ -11,9 +12,10 @@ const App = () => {
   return (
     <ThemeProvider theme={THEMES[theme]}>
       <GlobalStyle />
+      <Tooltips />
       <AppContainer>
-        <Tooltips />
         <Header />
+        <Body />
       </AppContainer>
     </ThemeProvider>
   )
