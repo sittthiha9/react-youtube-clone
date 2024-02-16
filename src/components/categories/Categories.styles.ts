@@ -4,30 +4,38 @@ export const StyledCategories = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: .5rem;
   position: relative;
-  padding-bottom: .6rem;
-  padding-top: 2rem;
   z-index: 100;
   padding-right: 10rem;
 `
 
-export const CategoryItem = styled.div`
-  background-color: ${({theme: {divider, text}}) => divider};
-  padding: .5rem 0.8rem;
-  border-radius: .5rem;
+export const CategoryItem = styled.div<{ active: string }>`
+  background-color: ${({ active, theme: { divider, text } }) => (active === "true" ? text : divider)};
+  padding: 0.5rem 0.8rem;
+  border-radius: 0.5rem;
   white-space: nowrap;
   height: 2rem;
   display: flex;
-  justify-content: center;
+  justify-content: center; 
   align-items: center;
 
   p{
-    color: ${({theme: {background, text}}) => text};
+    color: ${({ active, theme: { background, text } }) => (active === "true" ? background : text)} !important;
+    user-select: none;
   }
 
   &:hover{
     cursor: pointer;
+    background-color: ${({ theme: { grey2 } }) => grey2};
+    color: ${({ active, theme: { background, text } }) => (active === "true" ? background : text)} !important;
   }
+`
+
+export const CategoriesCarousel= styled.div`
+  width: 100%;
+  overflow-x: auto;
+  margin-bottom: -26px;
+  scroll-behavior: smooth;
 `
