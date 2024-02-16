@@ -1,8 +1,8 @@
 import { useAppContext } from '../../context/App.context';
-import { MENU_SMALL } from '../../utils/SideMenu';
+import { MENU_LARGE, MENU_SMALL } from '../../utils/SideMenu';
 import { Text } from '../../utils/Text.styles';
 import { ITranslations } from '../../utils/translations';
-import { MenuItem, StyledMenu } from './Menu.styles';
+import { LargeMenuSection, MenuItem, StyledMenu } from './Menu.styles';
 
 const Menu = () => {
   const { isMenuSmall, text } = useAppContext();
@@ -18,13 +18,21 @@ const Menu = () => {
         ))}
       </StyledMenu>
     )
+  } else {
+    return (
+      <StyledMenu>
+        {MENU_LARGE.map(({ title, list }, index) => (
+          <LargeMenuSection key={index}>
+            {list.map(({ name, icon }, index) => (
+              <MenuItem key={index} className='large'>
+                {icon}
+                <Text>{text[name as keyof ITranslations]}</Text>
+              </MenuItem>
+            ))}
+          </LargeMenuSection>))}
+      </StyledMenu>
+    )
   }
-
-  return (
-    <StyledMenu>
-      Menu
-    </StyledMenu>
-  )
 }
 
 export default Menu

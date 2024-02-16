@@ -6,9 +6,14 @@ export const StyledMenu = styled.div`
   overflow-x: hidden;
 `
 
+export const LargeMenuSection = styled.div`
+  border-bottom: 1px solid ${({ theme: { divider } }) => divider};
+  padding: .7rem 0;
+`
+
 export const MenuItem = styled.div`
   display: flex;
-  color: ${({theme: {text}}) => text};
+  color: ${({ theme: { text } }) => text};
   border-radius: 0.5rem;
 
   &.small{
@@ -23,8 +28,17 @@ export const MenuItem = styled.div`
     }
   }
 
+  &.large{
+    padding-left: 0.8rem;
+    height: 2.5rem;
+    margin-left: 0%.75rem;
+    align-items: center;
+    font-size: 23px;
+    gap: 1.3rem;
+  }
+
   &:hover{
-    background-color: ${({theme: {grey2}}) => grey2};
+    background-color: ${({ theme: { grey2 } }) => grey2};
     cursor: pointer;
   }
 `
