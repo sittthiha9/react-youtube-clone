@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const StyledCategories = styled.div`
   width: 100%;
-  height: 100%;
   display: flex;
   align-items: flex-end;
   gap: .5rem;
@@ -33,9 +32,10 @@ export const CategoryItem = styled.div<{ active: string }>`
   }
 `
 
-export const CategoriesCarousel= styled.div`
+export const CategoriesCarousel = styled.div`
   width: 100%;
   overflow-x: auto;
-  margin-bottom: -26px;
+  margin-top: 0.5rem;
+  margin-bottom: -3rem;
   scroll-behavior: smooth;
 `

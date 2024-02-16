@@ -12,7 +12,7 @@ const Categories = () => {
   const handleScroll = (event: React.WheelEvent<HTMLDivElement>) => {
     if (categoriesCarouselRef.current) {
       const delta = event.deltaY;
-      categoriesCarouselRef.current.scrollLeft -= delta * 1;
+      categoriesCarouselRef.current.scrollLeft += delta * 1;
     }
   };
 

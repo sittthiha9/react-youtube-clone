@@ -1,6 +1,6 @@
 import { Dispatch, ReactNode, SetStateAction, createContext, useContext, useEffect, useState } from "react";
 import { ITranslations, LANGUAGE } from "../utils/translations";
-import { createClient } from "pexels";
+import { Video, Videos, createClient } from "pexels";
 import { PEXELS_API_KEY } from "../utils/pexels";
 
 interface IAppContextValue {
@@ -15,17 +15,17 @@ interface IAppContextValue {
   toggleMenuSize: () => void;
   activeMenuText: string;
   activeCategory: string;
-  setActiveCategory: Dispatch<SetStateAction<string>>
+  setActiveCategory: Dispatch<SetStateAction<string>>;
+  videos: Video[];
+  isFetchingVideos: boolean;
 }
 const AppContext = createContext<IAppContextValue | null>(null)
 
 export const useAppContext = () => {
   const appContent = useContext(AppContext)
-
   if (!appContent) {
     throw new Error("There is no context")
   }
-
   return appContent;
 }
 
@@ -42,16 +42,19 @@ export const AppContextProvider = ({ children }: IAppContextProviderProps) => {
   const [isMenuSmall, setIsMenuSmall] = useState(false);
   const [activeMenuText, setActiveMenuText] = useState("home")
   const [activeCategory, setActiveCategory] = useState("all")
+  const [videos, setVideos] = useState<Video[]>([]);
+  const [isFetchingVideos, setIsFetchingVideos] = useState(true);
 
   useEffect(() => {
-    fetchVideo(activeCategory);
+    activeCategory && fetchVideo(activeCategory);
   }, [activeCategory, searchBarText])
 
   useEffect(() => {
-    fetchVideo(searchBarText);
+    searchBarText && fetchVideo(searchBarText);
   }, [searchBarText])
 
   const fetchVideo = async (query: string) => {
+    setIsFetchingVideos(true);
     try {
       if (!query) {
         return;
@@ -60,10 +63,11 @@ export const AppContextProvider = ({ children }: IAppContextProviderProps) => {
         query,
         per_page: 44
       })
-      console.log("response:", response)
+      setVideos((response as Videos).videos)
     } catch (error) {
       console.log("There was an error fetching videos:", error)
     }
+    setIsFetchingVideos(false);
   }
 
   const toggleTheme = () => {
@@ -91,6 +95,8 @@ export const AppContextProvider = ({ children }: IAppContextProviderProps) => {
     activeMenuText,
     setActiveCategory,
     activeCategory,
+    videos,
+    isFetchingVideos,
   }
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>
 }
