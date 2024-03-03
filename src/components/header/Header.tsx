@@ -15,12 +15,11 @@ import YouTubeLogo from "../../assets/youtubeicon.svg";
 const Header = () => {
   const [showSetting, setShowSetting] = useState<boolean>(false);
   const [searchText, setSearchText] = useState("")
-  const { text, searchBarText, setSearchBarText, toggleMenuSize } = useAppContext();
+  const { text, setSearchBarText, toggleMenuSize } = useAppContext();
 
   const {
     transcript,
     listening,
-    resetTranscript,
     browserSupportsSpeechRecognition
   } = useSpeechRecognition();
 
