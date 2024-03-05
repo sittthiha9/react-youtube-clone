@@ -26,7 +26,7 @@ const Header = () => {
   useEffect(() => {
     setSearchText(transcript);
     setSearchBarText(transcript);
-  }, [transcript])
+  }, [setSearchBarText, transcript])
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>)  => {
     if (e.key === 'Enter') {
