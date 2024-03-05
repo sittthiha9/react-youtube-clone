@@ -12,7 +12,7 @@ const Settings = () => {
       id: 1,
       label: text.language,
       icon: <HiLanguage size={23} />,
-      value: text[language === "english" ? "french" : "english"],
+      value: text[language === "english" ? "thai" : "english"],
       onclick: () => toggleLanguage(),
     },
     {

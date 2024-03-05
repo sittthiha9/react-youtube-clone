@@ -5,7 +5,7 @@ import { PEXELS_API_KEY } from "../utils/pexels";
 
 interface IAppContextValue {
   theme: "light" | "dark";
-  language: "english" | "french";
+  language: "english" | "thai";
   toggleLanguage: () => void;
   toggleTheme: () => void;
   text: ITranslations;
@@ -37,7 +37,7 @@ const client = createClient(PEXELS_API_KEY);
 
 export const AppContextProvider = ({ children }: IAppContextProviderProps) => {
   const [theme, setTheme] = useState<"light" | "dark">("dark");
-  const [language, setLanguage] = useState<"english" | "french">("english")
+  const [language, setLanguage] = useState<"english" | "thai">("english")
   const [searchBarText, setSearchBarText] = useState("");
   const [isMenuSmall, setIsMenuSmall] = useState(false);
   const [activeMenuText, setActiveMenuText] = useState("home")
@@ -75,7 +75,7 @@ export const AppContextProvider = ({ children }: IAppContextProviderProps) => {
   }
 
   const toggleLanguage = () => {
-    setLanguage(language => language === "english" ? "french" : 'english')
+    setLanguage(language => language === "english" ? "thai" : 'english')
   }
 
   const toggleMenuSize = () => {
