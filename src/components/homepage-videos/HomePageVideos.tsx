@@ -6,8 +6,8 @@ const HomePageVideos = () => {
   const { videos } = useAppContext();
 
   const FIRST_VIDEO_SECTION = videos.slice(0, 8);
-  const SECOND_VIDEO_SECTION = videos.slice(8, 20);
-  const THIRD_VIDEO_SECTION = videos.slice(20, 28);
+  // const SECOND_VIDEO_SECTION = videos.slice(8, 20);
+  // const THIRD_VIDEO_SECTION = videos.slice(20, 28);
 
   return (
     <StyledHomePageVideos>

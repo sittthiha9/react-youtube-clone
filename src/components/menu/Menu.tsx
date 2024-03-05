@@ -14,7 +14,7 @@ const Menu = () => {
       <StyledMenu>
         {MENU_SMALL.map(({ name, icon }) => (
           <MenuItem
-            active={(activeMenuText.toLowerCase() == text[name as keyof ITranslations].toLowerCase()).toString()}
+            active={(activeMenuText.toLowerCase() === text[name as keyof ITranslations].toLowerCase()).toString()}
             key={name}
             className='small'
           >
@@ -33,7 +33,7 @@ const Menu = () => {
               {title && <Text className='title'>{text[title as keyof ITranslations]}</Text>}
               {list.map(({ name, icon }) => (
                 <MenuItem
-                  active={(activeMenuText.toLowerCase() == text[name as keyof ITranslations].toLowerCase()).toString()}
+                  active={(activeMenuText.toLowerCase() === text[name as keyof ITranslations].toLowerCase()).toString()}
                   key={name}
                   className='large'
                 >

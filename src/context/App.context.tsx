@@ -40,6 +40,7 @@ export const AppContextProvider = ({ children }: IAppContextProviderProps) => {
   const [language, setLanguage] = useState<"english" | "thai">("english")
   const [searchBarText, setSearchBarText] = useState("");
   const [isMenuSmall, setIsMenuSmall] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [activeMenuText, setActiveMenuText] = useState("home")
   const [activeCategory, setActiveCategory] = useState("all")
   const [videos, setVideos] = useState<Video[]>([]);

@@ -45,7 +45,7 @@ const Header = () => {
           <SlMenu size={17} />
         </Icon>
         <LogoSection to="">
-          <img src={YouTubeLogo} width={30}/>
+          <img src={YouTubeLogo} width={30} alt="" />
           <Text className='logo'>YouTube</Text>
         </LogoSection>
       </LeftSection>
