@@ -5,7 +5,7 @@ import { SlMenu } from 'react-icons/sl'
 import { Icon } from './../../utils/Icon.styles';
 import AuthButton from '../auth-button/AuthButton';
 import { CgMoreVerticalAlt } from 'react-icons/cg';
-import { MouseEventHandler, useEffect, useState } from 'react';
+import { KeyboardEvent, MouseEventHandler, useEffect, useState } from 'react';
 import Settings from '../settings/Settings';
 import { useAppContext } from '../../context/App.context';
 import { LuSearch } from 'react-icons/lu';
@@ -23,11 +23,16 @@ const Header = () => {
     browserSupportsSpeechRecognition
   } = useSpeechRecognition();
 
-  
   useEffect(() => {
     setSearchText(transcript);
     setSearchBarText(transcript);
   }, [transcript])
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>)  => {
+    if (e.key === 'Enter') {
+      setSearchBarText(searchText);
+    }
+  };
 
   if (!browserSupportsSpeechRecognition) {
     return <span>Browser doesn't support speech recognition.</span>;
@@ -46,7 +51,7 @@ const Header = () => {
       </LeftSection>
       <SearchSection>
         <SearchBar>
-          <input onChange={e => setSearchText(e.target.value)} value={searchText} placeholder={text.search} />
+          <input  onKeyDown={handleKeyDown} onChange={e => setSearchText(e.target.value)} value={searchText} placeholder={text.search} />
           <Icon
             data-tooltip-id='search'
             data-tooltip-content={text.search}
