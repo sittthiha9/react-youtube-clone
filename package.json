@@ -50,5 +50,10 @@
   "devDependencies": {
     "@babel/plugin-transform-private-property-in-object": "^7.23.4",
     "@types/react-speech-recognition": "^3.9.5"
+  },
+  "babel": {
+    "plugins": [
+      "@babel/plugin-transform-private-property-in-object"
+    ]
   }
 }
