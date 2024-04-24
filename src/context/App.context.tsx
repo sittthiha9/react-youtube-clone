@@ -2,6 +2,7 @@ import { Dispatch, ReactNode, SetStateAction, createContext, useContext, useEffe
 import { ITranslations, LANGUAGE } from "../utils/translations";
 import { Video, Videos, createClient } from "pexels";
 import { PEXELS_API_KEY } from "../utils/pexels";
+import { useNavigate } from "react-router-dom";
 
 interface IAppContextValue {
   theme: "light" | "dark";
@@ -18,6 +19,8 @@ interface IAppContextValue {
   setActiveCategory: Dispatch<SetStateAction<string>>;
   videos: Video[];
   isFetchingVideos: boolean;
+  videoToWatch: number;
+  setVideoToWatch: Dispatch<SetStateAction<number>>;
 }
 const AppContext = createContext<IAppContextValue | null>(null)
 
@@ -45,6 +48,15 @@ export const AppContextProvider = ({ children }: IAppContextProviderProps) => {
   const [activeCategory, setActiveCategory] = useState("all")
   const [videos, setVideos] = useState<Video[]>([]);
   const [isFetchingVideos, setIsFetchingVideos] = useState(true);
+  const [videoToWatch, setVideoToWatch] = useState<number>(0)
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (videoToWatch !== 0) {
+      navigate(`/${videoToWatch}`)
+    }
+  }, [videoToWatch])
 
   useEffect(() => {
     activeCategory && fetchVideo(activeCategory);
@@ -98,6 +110,8 @@ export const AppContextProvider = ({ children }: IAppContextProviderProps) => {
     activeCategory,
     videos,
     isFetchingVideos,
+    videoToWatch,
+    setVideoToWatch,
   }
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>
 }

@@ -15,13 +15,14 @@ interface IShortsVideoItemProps {
 
 const ShortVideoItems = ({ video }: IShortsVideoItemProps) => {
   const [playTrailer, setPlayTrailer] = useState(false);
-  const { isMenuSmall } = useAppContext();
+  const { isMenuSmall, setVideoToWatch } = useAppContext();
   const TITLE_LENGTH = 50;
 
   return (
     <StyledShortVideoItems
       onMouseOver={() => setPlayTrailer(true)}
       onMouseOut={() => setPlayTrailer(false)}
+      onClick={() => setVideoToWatch(video.id)}
     >
       <ShortsVideoThumbnail $isMenuSmall={isMenuSmall}>
         {playTrailer ? (
@@ -44,9 +45,7 @@ const ShortVideoItems = ({ video }: IShortsVideoItemProps) => {
         {getTitle(video.url).slice(0, TITLE_LENGTH)}
         {getTitle(video.url).length > TITLE_LENGTH && "..."}
       </Text>
-      <Text className="details">
-        {video.duration}M views
-      </Text>
+      <Text className="details">{video.duration}M views</Text>
     </StyledShortVideoItems>
   );
 };

@@ -1,10 +1,12 @@
-import { ThemeProvider } from "styled-components"
-import { AppContainer, GlobalStyle } from "./App.styles"
-import { THEMES } from "./utils/theme"
-import { useAppContext } from "./context/App.context"
-import Header from "./components/header/Header"
-import Tooltips from "./utils/Tooltips"
-import Body from "./components/body/Body"
+import { ThemeProvider } from "styled-components";
+import { AppContainer, GlobalStyle } from "./App.styles";
+import { THEMES } from "./utils/theme";
+import { useAppContext } from "./context/App.context";
+import Header from "./components/header/Header";
+import Tooltips from "./utils/Tooltips";
+import Body from "./components/body/Body";
+import { Route, Routes } from "react-router-dom";
+import WatchVideoContents from "./components/watch-video-contents/WatchVideoContents";
 
 const App = () => {
   const { theme } = useAppContext();
@@ -15,10 +17,13 @@ const App = () => {
       <Tooltips />
       <AppContainer>
         <Header />
-        <Body />
+        <Routes>
+          <Route path="/" element={<Body />} />
+          <Route path="/:id" element={<WatchVideoContents />} />
+        </Routes>
       </AppContainer>
     </ThemeProvider>
-  )
-}
+  );
+};
 
-export default App
+export default App;

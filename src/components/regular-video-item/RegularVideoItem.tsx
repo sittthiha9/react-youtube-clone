@@ -8,17 +8,21 @@ import { getTitle } from '../../utils/videos';
 
 interface IRegularVideoItemProps {
   video: Video;
+  smallView? : boolean;
 }
 
-const RegularVideoItem = ({ video }: IRegularVideoItemProps) => {
+const RegularVideoItem = ({ video, smallView }: IRegularVideoItemProps) => {
   const [playTrailer, setPlayTrailer] = useState(false);
-  const { isMenuSmall } = useAppContext();
+  const { isMenuSmall, setVideoToWatch } = useAppContext();
   const TITLE_LENGTH = 60;
 
   return (
     <StyledRegularVideoItem
       onMouseOver={() => setPlayTrailer(true)}
       onMouseOut={() => setPlayTrailer(false)}
+      onClick={() => setVideoToWatch(video.id)}
+      className={`${smallView && "smallView"}`}
+
     >
       <RegularVideoThumbnail $isMenuSmall={isMenuSmall}>
         {playTrailer ? (

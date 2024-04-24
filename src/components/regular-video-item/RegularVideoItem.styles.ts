@@ -10,6 +10,11 @@ export const StyledRegularVideoItem = styled.div`
   &:hover{
     cursor: pointer;
   }
+
+  &.smallView {
+    flex-direction: row;
+    height: auto;
+  }
 `
 
 export const RegularVideoThumbnail = styled.div<{ $isMenuSmall?: boolean }>`
@@ -29,6 +34,11 @@ export const RegularVideoThumbnail = styled.div<{ $isMenuSmall?: boolean }>`
   ${({ $isMenuSmall }) => $isMenuSmall && css`
     height: 13.7rem;
   `}
+
+  &.smallView {
+    height: 6rem;
+    width: 19rem;
+  }
 `
 
 export const Time = styled.div`

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StyledVideoShorts = styled.div`
-  width: 100%;
+  width: 98%;
   margin: 2rem;
 `;
 
@@ -23,6 +23,7 @@ export const MoreLessContainer = styled.div`
   border-top: 1px solid ${({ theme: { divider } }) => divider};
   margin-top: 2.5rem;
   margin-bottom: auto.5rem;
+  padding-right: 5rem;
 `;
 
 export const ShortsVideoContainer = styled.div`
