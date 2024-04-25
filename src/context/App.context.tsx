@@ -21,6 +21,8 @@ interface IAppContextValue {
   isFetchingVideos: boolean;
   videoToWatch: number;
   setVideoToWatch: Dispatch<SetStateAction<number>>;
+  videoToWatchData: Video | undefined;
+  fetchVideo: (id: string) => Promise<void>;
 }
 const AppContext = createContext<IAppContextValue | null>(null)
 
@@ -49,6 +51,7 @@ export const AppContextProvider = ({ children }: IAppContextProviderProps) => {
   const [videos, setVideos] = useState<Video[]>([]);
   const [isFetchingVideos, setIsFetchingVideos] = useState(true);
   const [videoToWatch, setVideoToWatch] = useState<number>(0)
+  const [videoToWatchData, setVideoToWatchData] = useState<Video>();
 
   const navigate = useNavigate();
 
@@ -59,14 +62,14 @@ export const AppContextProvider = ({ children }: IAppContextProviderProps) => {
   }, [videoToWatch])
 
   useEffect(() => {
-    activeCategory && fetchVideo(activeCategory);
+    activeCategory && fetchVideos(activeCategory);
   }, [activeCategory, searchBarText])
 
   useEffect(() => {
-    searchBarText && fetchVideo(searchBarText);
+    searchBarText && fetchVideos(searchBarText);
   }, [searchBarText])
 
-  const fetchVideo = async (query: string) => {
+  const fetchVideos = async (query: string) => {
     setIsFetchingVideos(true);
     try {
       if (!query) {
@@ -82,6 +85,25 @@ export const AppContextProvider = ({ children }: IAppContextProviderProps) => {
     }
     setIsFetchingVideos(false);
   }
+
+  const fetchVideo = async (id: string) => {
+    setIsFetchingVideos(true);
+    try {
+      const response = await client.videos.show({
+        id,
+      });
+      console.log("Video response:", response); // Log the response
+      if (response && response.video_files && response.video_files.length > 0) {
+        setVideoToWatchData(response as Video);
+      } else {
+        console.error("Invalid video response:", response);
+      }
+    } catch (error) {
+      console.error("Error fetching video:", error);
+    } finally {
+      setIsFetchingVideos(false);
+    }
+  };
 
   const toggleTheme = () => {
     setTheme(theme => theme === "light" ? "dark" : 'light')
@@ -112,6 +134,8 @@ export const AppContextProvider = ({ children }: IAppContextProviderProps) => {
     isFetchingVideos,
     videoToWatch,
     setVideoToWatch,
+    videoToWatchData,
+    fetchVideo
   }
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>
 }
