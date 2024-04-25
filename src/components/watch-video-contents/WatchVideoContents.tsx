@@ -13,7 +13,7 @@ const WatchVideoContents = () => {
     <StyledWatchVideoContents>
       <p>Left</p>
       <MoreVideosContainer>
-        <Categories />
+        {/* <Categories /> */}
         {videos.map((video, index) => (
           <RegularVideoItem smallView key={index} video={video} />
         ))}

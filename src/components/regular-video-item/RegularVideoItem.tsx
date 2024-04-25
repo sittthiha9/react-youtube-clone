@@ -1,14 +1,21 @@
-import { useState } from 'react';
-import { RegularVideoContent, RegularVideoPic, RegularVideoThumbnail, RegularVideoTile, StyledRegularVideoItem, Time } from './RegularVideoItem.styles';
-import { Video } from 'pexels';
-import ReactPlayer from 'react-player';
-import { useAppContext } from './../../context/App.context';
-import { Text } from '../../utils/Text.styles';
-import { getTitle } from '../../utils/videos';
+import { useState } from "react";
+import {
+  RegularVideoContent,
+  RegularVideoPic,
+  RegularVideoThumbnail,
+  RegularVideoTile,
+  StyledRegularVideoItem,
+  Time,
+} from "./RegularVideoItem.styles";
+import { Video } from "pexels";
+import ReactPlayer from "react-player";
+import { useAppContext } from "./../../context/App.context";
+import { Text } from "../../utils/Text.styles";
+import { getTitle } from "../../utils/videos";
 
 interface IRegularVideoItemProps {
   video: Video;
-  smallView? : boolean;
+  smallView?: boolean;
 }
 
 const RegularVideoItem = ({ video, smallView }: IRegularVideoItemProps) => {
@@ -22,9 +29,11 @@ const RegularVideoItem = ({ video, smallView }: IRegularVideoItemProps) => {
       onMouseOut={() => setPlayTrailer(false)}
       onClick={() => setVideoToWatch(video.id)}
       className={`${smallView && "smallView"}`}
-
     >
-      <RegularVideoThumbnail $isMenuSmall={isMenuSmall}>
+      <RegularVideoThumbnail
+        $isMenuSmall={isMenuSmall}
+        className={`${smallView && "smallView"}`}
+      >
         {playTrailer ? (
           <ReactPlayer
             width={"100%"}
@@ -37,7 +46,7 @@ const RegularVideoItem = ({ video, smallView }: IRegularVideoItemProps) => {
             url={video.video_files[0].link}
           />
         ) : (
-          <img src={video.image} alt='thumbnail' />
+          <img src={video.image} alt="thumbnail" />
         )}
         <Time>
           <Text>
@@ -46,25 +55,24 @@ const RegularVideoItem = ({ video, smallView }: IRegularVideoItemProps) => {
         </Time>
       </RegularVideoThumbnail>
 
-      <RegularVideoContent>
-        <RegularVideoPic>
-          <img src={video.image} alt='profile pic' />
+      <RegularVideoContent className={`${smallView && "smallView"}`}>
+        <RegularVideoPic className={`${smallView && "smallView"}`}>
+          <img src={video.image} alt="profile pic" />
         </RegularVideoPic>
-        <RegularVideoTile>
-          <Text className='videoItem'>
+        <RegularVideoTile className={`${smallView && "smallView"}`}>
+          <Text className="videoItem">
             {getTitle(video.url).slice(0, TITLE_LENGTH)}
             {getTitle(video.url).length > TITLE_LENGTH && "..."}
           </Text>
-          <Text className='name'>{video.user.name}</Text>
-          <Text className='details'>{video.duration}
-            M views
-            <span className='dot'>&#9679;</span>
-            2 hours ago
+          <Text className="name">{video.user.name}</Text>
+          <Text className="details">
+            {video.duration}M views
+            <span className="dot">&#9679;</span>2 hours ago
           </Text>
         </RegularVideoTile>
       </RegularVideoContent>
     </StyledRegularVideoItem>
-  )
-}
+  );
+};
 
-export default RegularVideoItem
+export default RegularVideoItem;
