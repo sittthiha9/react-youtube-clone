@@ -32,6 +32,7 @@ const WatchVideoContents = () => {
   const { videos, fetchVideo, videoToWatchData, isFetchingVideos, text } =
     useAppContext();
   const { id } = useParams();
+  console.log("🚀 ~ WatchVideoContents ~ videos:", videos);
 
   document.title = getTitle(videoToWatchData?.url!);
 
@@ -51,7 +52,7 @@ const WatchVideoContents = () => {
         <VideoScreen>
           <ReactPlayer
             width={"100%"}
-            height={"100%"}
+            height="100%"
             controls={true}
             volume={1}
             muted={false}
