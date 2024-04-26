@@ -50,7 +50,13 @@ const RegularVideoItem = ({ video, smallView }: IRegularVideoItemProps) => {
         )}
         <Time>
           <Text>
-            {Math.floor(video.duration / 60)}:{Math.floor(video.duration % 60)}
+            {Math.floor(video.duration / 60)
+              .toString()
+              .padStart(2, "0")}
+            :
+            {Math.floor(video.duration % 60)
+              .toString()
+              .padStart(2, "0")}
           </Text>
         </Time>
       </RegularVideoThumbnail>
