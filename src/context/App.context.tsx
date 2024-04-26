@@ -1,4 +1,12 @@
-import { Dispatch, ReactNode, SetStateAction, createContext, useContext, useEffect, useState } from "react";
+import {
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { ITranslations, LANGUAGE } from "../utils/translations";
 import { Video, Videos, createClient } from "pexels";
 import { PEXELS_API_KEY } from "../utils/pexels";
@@ -24,15 +32,15 @@ interface IAppContextValue {
   videoToWatchData: Video | undefined;
   fetchVideo: (id: string) => Promise<void>;
 }
-const AppContext = createContext<IAppContextValue | null>(null)
+const AppContext = createContext<IAppContextValue | null>(null);
 
 export const useAppContext = () => {
-  const appContent = useContext(AppContext)
+  const appContent = useContext(AppContext);
   if (!appContent) {
-    throw new Error("There is no context")
+    throw new Error("There is no context");
   }
   return appContent;
-}
+};
 
 interface IAppContextProviderProps {
   children: ReactNode;
@@ -42,32 +50,32 @@ const client = createClient(PEXELS_API_KEY);
 
 export const AppContextProvider = ({ children }: IAppContextProviderProps) => {
   const [theme, setTheme] = useState<"light" | "dark">("dark");
-  const [language, setLanguage] = useState<"english" | "thai">("english")
+  const [language, setLanguage] = useState<"english" | "thai">("english");
   const [searchBarText, setSearchBarText] = useState("");
   const [isMenuSmall, setIsMenuSmall] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [activeMenuText, setActiveMenuText] = useState("home")
-  const [activeCategory, setActiveCategory] = useState("all")
+  const [activeMenuText, setActiveMenuText] = useState("home");
+  const [activeCategory, setActiveCategory] = useState("all");
   const [videos, setVideos] = useState<Video[]>([]);
   const [isFetchingVideos, setIsFetchingVideos] = useState(true);
-  const [videoToWatch, setVideoToWatch] = useState<number>(0)
+  const [videoToWatch, setVideoToWatch] = useState<number>(0);
   const [videoToWatchData, setVideoToWatchData] = useState<Video>();
 
   const navigate = useNavigate();
 
   useEffect(() => {
     if (videoToWatch !== 0) {
-      navigate(`/${videoToWatch}`)
+      navigate(`/${videoToWatch}`);
     }
-  }, [videoToWatch])
+  }, [videoToWatch]);
 
   useEffect(() => {
     activeCategory && fetchVideos(activeCategory);
-  }, [activeCategory, searchBarText])
+  }, [activeCategory, searchBarText]);
 
   useEffect(() => {
     searchBarText && fetchVideos(searchBarText);
-  }, [searchBarText])
+  }, [searchBarText]);
 
   const fetchVideos = async (query: string) => {
     setIsFetchingVideos(true);
@@ -77,14 +85,14 @@ export const AppContextProvider = ({ children }: IAppContextProviderProps) => {
       }
       const response = await client.videos.search({
         query,
-        per_page: 44
-      })
-      setVideos((response as Videos).videos)
+        per_page: 44,
+      });
+      setVideos((response as Videos).videos);
     } catch (error) {
-      console.log("There was an error fetching videos:", error)
+      console.log("There was an error fetching videos:", error);
     }
     setIsFetchingVideos(false);
-  }
+  };
 
   const fetchVideo = async (id: string) => {
     setIsFetchingVideos(true);
@@ -106,16 +114,16 @@ export const AppContextProvider = ({ children }: IAppContextProviderProps) => {
   };
 
   const toggleTheme = () => {
-    setTheme(theme => theme === "light" ? "dark" : 'light')
-  }
+    setTheme((theme) => (theme === "light" ? "dark" : "light"));
+  };
 
   const toggleLanguage = () => {
-    setLanguage(language => language === "english" ? "thai" : 'english')
-  }
+    setLanguage((language) => (language === "english" ? "thai" : "english"));
+  };
 
   const toggleMenuSize = () => {
-    setIsMenuSmall(state => !state)
-  }
+    setIsMenuSmall((state) => !state);
+  };
 
   const value = {
     theme,
@@ -127,7 +135,7 @@ export const AppContextProvider = ({ children }: IAppContextProviderProps) => {
     setSearchBarText,
     isMenuSmall,
     toggleMenuSize,
-    activeMenuText,
+    activeMenuText: LANGUAGE[language][activeMenuText as keyof ITranslations],
     setActiveCategory,
     activeCategory,
     videos,
@@ -135,7 +143,7 @@ export const AppContextProvider = ({ children }: IAppContextProviderProps) => {
     videoToWatch,
     setVideoToWatch,
     videoToWatchData,
-    fetchVideo
-  }
-  return <AppContext.Provider value={value}>{children}</AppContext.Provider>
-}
+    fetchVideo,
+  };
+  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
+};

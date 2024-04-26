@@ -10,9 +10,10 @@ const beats = keyframes`
   100%{
     transform: scale(0.8);
   }
-`
-export const Icon = styled.div<{$showBackground?: boolean}>`
-  background-color: ${({ theme, $showBackground }) => $showBackground ? theme.grey2 : "transparent"};
+`;
+export const Icon = styled.div<{ $showBackground?: boolean }>`
+  background-color: ${({ theme, $showBackground }) =>
+    $showBackground ? theme.grey2 : "transparent"};
   border-radius: 100rem;
   color: ${({ theme }) => theme.text};
   display: flex;
@@ -22,14 +23,20 @@ export const Icon = styled.div<{$showBackground?: boolean}>`
   cursor: pointer;
 
   &.menu {
-    &:hover{
-      background-color: ${({theme}) => theme.grey2};
+    &:hover {
+      background-color: ${({ theme }) => theme.grey2};
     }
   }
 
   &.listening {
-    background-color: ${({theme: {youtubeRed}}) => youtubeRed};
+    background-color: ${({ theme: { youtubeRed } }) => youtubeRed};
     animation: ${beats} 1s linear infinite;
-    color: ${({theme: {white}}) => white};
+    color: ${({ theme: { white } }) => white};
   }
-`
+
+  &.disabled {
+    &:hover {
+      cursor: not-allowed;
+    }
+  }
+`;

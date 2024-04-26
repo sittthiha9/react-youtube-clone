@@ -47,7 +47,6 @@ export const VideoDescription = styled.div`
   background-color: ${({ theme: { grey2 } }) => grey2};
   padding: 1rem;
   border-radius: 1rem;
-  margin-top: 1rem;
   line-height: 1.5rem;
 `;
 
@@ -80,12 +79,46 @@ export const UserAccount = styled.div`
   }
 `;
 
-export const SubscribeButton = styled.div`
-    padding: 0.6rem 0.6rem;
-    border-radius: 200rem;
-    background-color: ${({theme: {text}}) => text};
-    color: ${({theme: {background}}) => background};
-    margin-left: 2rem;
-    font-size: 15px;
+export const VideoDetails = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+
+  .videoScreenTitle {
+    font-size: 22px;
     font-weight: bold;
+  }
+`;
+
+export const SubscribeButton = styled.div`
+  padding: 0.6rem 0.6rem;
+  border-radius: 200rem;
+  background-color: ${({ theme: { text } }) => text};
+  color: ${({ theme: { background } }) => background};
+  margin-left: 2rem;
+  font-size: 15px;
+  font-weight: bold;
+`;
+
+export const DetailsActions = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+`;
+
+export const DetailsActionButton = styled.div`
+  background-color: ${({ theme: { grey2 } }) => grey2};
+  color: ${({ theme: { text } }) => text};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 100rem;
+  padding: 0.5rem 0.8rem;
+  cursor: pointer;
+
+  .divider {
+    border-left: 1px solid ${({ theme: { grey3 } }) => grey3};
+  }
 `;

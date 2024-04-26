@@ -35,7 +35,7 @@ export const CategoryItem = styled.div<{ active: string }>`
 export const CategoriesCarousel = styled.div`
   width: 100%;
   overflow-x: auto;
-  margin-top: 0.5rem;
+  /* margin-top: 0.5rem; */
   margin-bottom: -3rem;
   scroll-behavior: smooth;
 `

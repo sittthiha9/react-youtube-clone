@@ -7,6 +7,7 @@ export const StyledContent = styled.div`
   grid-template-columns: 1fr;
   grid-template-rows: 5.5vh 99.7vh;
   position: relative;
+  margin-top: 1rem;
 `
 
 export const LoadingBackdrop = styled.div`
