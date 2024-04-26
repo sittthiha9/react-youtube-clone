@@ -12,7 +12,13 @@ import { SlMenu } from "react-icons/sl";
 import { Icon } from "./../../utils/Icon.styles";
 import AuthButton from "../auth-button/AuthButton";
 import { CgMoreVerticalAlt } from "react-icons/cg";
-import { KeyboardEvent, MouseEventHandler, useEffect, useState } from "react";
+import {
+  KeyboardEvent,
+  MouseEventHandler,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import Settings from "../settings/Settings";
 import { useAppContext } from "../../context/App.context";
 import { LuSearch } from "react-icons/lu";
@@ -26,11 +32,25 @@ const Header = () => {
   const [showSetting, setShowSetting] = useState<boolean>(false);
   const [searchText, setSearchText] = useState("");
   const { text, setSearchBarText, toggleMenuSize } = useAppContext();
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   const { transcript, listening, browserSupportsSpeechRecognition } =
     useSpeechRecognition();
 
   const { pathname } = useLocation();
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      const target = event.target as HTMLElement;
+      if (wrapperRef.current && !wrapperRef.current.contains(target)) {
+        setShowSetting(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   useEffect(() => {
     setSearchText(transcript);
@@ -52,7 +72,7 @@ const Header = () => {
   if (isHomePath) {
     document.title = "YouTube";
   }
-  
+
   return (
     <StyledHeader>
       <LeftSection>
@@ -95,11 +115,11 @@ const Header = () => {
           <FaMicrophone size={19} />
         </Icon>
       </SearchSection>
-      <HeaderMoreSection>
+      <HeaderMoreSection ref={wrapperRef}>
         <Icon
           data-tooltip-id="settings"
-          data-tooltip-content={"Settings"}
-          onClick={() => setShowSetting((preValue) => !preValue)}
+          data-tooltip-content="Settings"
+          onClick={() => setShowSetting((prevValue) => !prevValue)}
         >
           <CgMoreVerticalAlt size={21} />
         </Icon>
